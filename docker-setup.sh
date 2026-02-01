@@ -6,7 +6,7 @@ COMPOSE_FILE="$ROOT_DIR/docker-compose.yml"
 EXTRA_COMPOSE_FILE="$ROOT_DIR/docker-compose.extra.yml"
 IMAGE_NAME="${OPENCLAW_IMAGE:-openclaw:local}"
 EXTRA_MOUNTS="${OPENCLAW_EXTRA_MOUNTS:-}"
-HOME_VOLUME_NAME="${OPENCLAW_HOME_VOLUME:-}"
+HOME_VOLUME_NAME="${OPENCLAW_HOME_VOLUME:-my-vm_vm-home}"
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -94,6 +94,7 @@ YAML
     cat >>"$EXTRA_COMPOSE_FILE" <<YAML
 volumes:
   ${home_volume}:
+    external: true
 YAML
   fi
 }
